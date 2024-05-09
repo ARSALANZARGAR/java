@@ -1,23 +1,25 @@
 pipeline {
-    agent any
+    agent any // Use any available agent on the Jenkins instance
+
     stages {
-        stage('Build') {
+        stage('Build') { // Defines a stage named 'Build'
             steps {
-                echo 'Building the project...'
-                // Add your build steps here
+                // This step runs a shell command to build the project
+                sh 'mvn clean package'
             }
         }
-        stage('Test') {
+        stage('Test') { // Defines a stage named 'Test'
             steps {
-                echo 'Running tests...'
-                // Add your test steps here
+                // This step runs a shell command to run tests
+                sh 'mvn test'
             }
         }
-        stage('Deploy') {
+        stage('Deploy') { // Defines a stage named 'Deploy'
             steps {
-                echo 'Deploying the application...'
-                // Add your deployment steps here
+                // This step runs a shell command to deploy the application
+                sh 'kubectl apply -f deployment.yaml'
             }
         }
     }
 }
+
